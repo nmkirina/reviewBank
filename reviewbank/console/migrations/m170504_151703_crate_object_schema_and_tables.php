@@ -36,15 +36,15 @@ class m170504_151703_crate_object_schema_and_tables extends Migration
                         );");
         $this->execute("CREATE TABLE \"user\".collection
                         (
-                          id integer NOT NULL,
-                          user_id integer,
-                          object_id integer,
-                          created_on timestamp without time zone,
-                          CONSTRAINT collection_pkey PRIMARY KEY (id),
-                          CONSTRAINT collection_object_id_fkey FOREIGN KEY (object_id)
-                              REFERENCES object.object (id) MATCH SIMPLE
-                              ON UPDATE NO ACTION ON DELETE NO ACTION,
-                          CONSTRAINT collection_user_id_fkey FOREIGN KEY (user_id)
+                            id integer NOT NULL,
+                            user_id integer,
+                            object_id integer,
+                            created_at timestamp without time zone DEFAULT now(),
+                            CONSTRAINT collection_pkey PRIMARY KEY (id),
+                            CONSTRAINT collection_object_id_fkey FOREIGN KEY (object_id)
+                                REFERENCES object.object (id) MATCH SIMPLE
+                                ON UPDATE NO ACTION ON DELETE NO ACTION,
+                            CONSTRAINT collection_user_id_fkey FOREIGN KEY (user_id)
                               REFERENCES \"user\".user (id) MATCH SIMPLE
                               ON UPDATE NO ACTION ON DELETE NO ACTION
                         )
@@ -56,7 +56,7 @@ class m170504_151703_crate_object_schema_and_tables extends Migration
                           id integer NOT NULL,
                           user_id integer,
                           object_id integer,
-                          created_on timestamp without time zone,
+                          created_at timestamp without time zone DEFAULT now(),
                           CONSTRAINT wishlist_pkey PRIMARY KEY (id),
                           CONSTRAINT wishlist_object_id_fkey FOREIGN KEY (object_id)
                               REFERENCES object.object (id) MATCH SIMPLE
