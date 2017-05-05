@@ -26,7 +26,21 @@ class m170504_145549_crate_user_table extends Migration
                         WITH (
                           OIDS=FALSE
                         );");
-        
+        $this->execute("CREATE TABLE \"user\".user_admin
+                        (
+                          id integer NOT NULL,
+                          email character varying NOT NULL,
+                          password character varying,
+                          created_at timestamp without time zone DEFAULT now(),
+                          last_login timestamp without time zone DEFAULT now(),
+                          auth_key character varying,
+                          CONSTRAINT user_admin_pkey PRIMARY KEY (id),
+                          CONSTRAINT user_admin_username_key UNIQUE (username)
+                        )
+                        WITH (
+                          OIDS=FALSE
+                        );
+                    ");
         $this->execute("CREATE TABLE \"user\".comment
                         (
                             id integer NOT NULL,
